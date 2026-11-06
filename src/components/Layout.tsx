@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { cx } from './ui';
 
-type IconName = 'home' | 'checkin' | 'training' | 'todos' | 'more' | 'body' | 'settings';
+type IconName = 'home' | 'checkin' | 'training' | 'todos' | 'more' | 'body' | 'settings' | 'data';
 
 const paths: Record<IconName, ReactNode> = {
   home: <path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" />,
@@ -19,6 +19,12 @@ const paths: Record<IconName, ReactNode> = {
       <circle cx="5" cy="12" r="1" />
       <circle cx="12" cy="12" r="1" />
       <circle cx="19" cy="12" r="1" />
+    </>
+  ),
+  data: (
+    <>
+      <ellipse cx="12" cy="5" rx="8" ry="3" />
+      <path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" />
     </>
   ),
   body: <path d="M12 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6M6 21l2-9h8l2 9M8 12l-3-2M16 12l3-2" />,
@@ -52,6 +58,7 @@ export const sideNav: { to: string; label: string; icon: IconName }[] = [
   { to: '/training', label: 'Training', icon: 'training' },
   { to: '/todos', label: 'To-Dos', icon: 'todos' },
   { to: '/koerper', label: 'Körper', icon: 'body' },
+  { to: '/daten', label: 'Daten & Sync', icon: 'data' },
   { to: '/einstellungen', label: 'Einstellungen', icon: 'settings' },
 ];
 

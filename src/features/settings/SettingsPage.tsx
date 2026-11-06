@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { db } from '../../data/db';
 import { loadDemoData, removeDemoData } from '../../data/demoData';
 import { updateSettings } from '../../data/repo';
@@ -71,7 +72,13 @@ export function SettingsPage() {
           </div>
         </Card>
 
-        <p className="px-1 text-xs text-muted">Alle Daten liegen nur auf diesem Gerät. Sync, Import und Backup folgen in Milestone 4.</p>
+        <p className="px-1 text-xs text-muted">
+          Alle Daten liegen auf diesem Gerät. Import, Backup und Dropbox-Sync findest du unter{' '}
+          <Link to="/daten" className="underline">
+            Daten &amp; Sync
+          </Link>
+          .
+        </p>
       </div>
       <Toast message={toast} />
     </>

@@ -9,6 +9,7 @@ import { WorkoutForm } from './features/training/WorkoutForm';
 import { TodosPage } from './features/todos/TodosPage';
 import { BodyPage } from './features/body/BodyPage';
 import { SettingsPage } from './features/settings/SettingsPage';
+import { DataPage } from './features/data/DataPage';
 
 function MorePage() {
   const items = sideNav.filter((i) => !['/', '/checkin', '/training', '/todos'].includes(i.to));
@@ -44,6 +45,7 @@ export function App() {
           <Route path="training/:id" element={<WorkoutForm />} />
           <Route path="todos" element={<TodosPage />} />
           <Route path="koerper" element={<BodyPage />} />
+          <Route path="daten" element={<DataPage />} />
           <Route path="einstellungen" element={<SettingsPage />} />
           <Route path="mehr" element={<MorePage />} />
           <Route path="*" element={<DashboardPage />} />
