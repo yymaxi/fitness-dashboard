@@ -10,7 +10,7 @@ Läuft komplett im Browser, Daten bleiben auf dem Gerät (Sync über die eigene 
 | Milestone | Inhalt | Status |
 |---|---|---|
 | 1 | Datenmodell, Speicherung, Check-in, Training, To-Dos, Körper, Demo-Daten | ✅ |
-| 2 | Startseite mit Kacheln, Ampel, Wochenzielen | offen |
+| 2 | Startseite mit Kacheln, Ampel, Schlaf-Score, Wochenzielen | ✅ |
 | 3 | Detailseiten, Diagramme, Trends, Zusammenhänge, PRs | offen |
 | 4 | Apple-Health-Import, CSV-Import/-Export, Backup, Dropbox-Sync | offen |
 | 5 | Wochenrückblick, Einstellungen, Feinschliff | offen |
@@ -67,3 +67,20 @@ bestehende Versionen werden nie verändert.
 
 **Demo-Daten** tragen `updatedAt = 1`. Sie überschreiben keine eigenen Einträge, lassen sich gezielt
 wieder entfernen und werden später nicht synchronisiert.
+
+## Ampel-Logik (`src/domain/readiness.ts`)
+
+Jeder Faktor wird als gut / mittel / schlecht bewertet (Schwellen in `settings.readiness`):
+Schlaf im Verhältnis zum Ziel (gut ≥ 90 %, schlecht < 75 %), Erholung (gut ≥ 7, schlecht ≤ 4),
+Muskelkater (gut ≤ 4, schlecht ≥ 7), Ruhepuls über dem 14-Tage-Schnitt (mittel ab +3, schlecht ab +6 bpm),
+HRV unter dem 14-Tage-Schnitt (mittel ab −10 %, schlecht ab −20 %), optional Knie (mittel ab 3, schlecht ab 5).
+Ruhepuls und HRV werden erst ab 5 Vergleichswerten bewertet.
+
+**Rot** = mindestens zwei Faktoren schlecht · **Gelb** = einer schlecht oder zwei mittel · **Grün** = sonst.
+
+## Schlaf-Score (`src/domain/sleepScore.ts`)
+
+0–100 Punkte aus Dauer (50, linear bis zum Ziel), Tief- + REM-Anteil (15, voll ab 40 %),
+wenig Wachphasen (15, voll bis 5 % Wachanteil) und Regelmäßigkeit (20, Einschlafzeit gegen den
+eigenen 14-Tage-Schnitt, 0 Punkte ab 90 min Abweichung). Fehlende Teile werden weggelassen und
+die übrigen auf 100 hochgerechnet.
