@@ -1,0 +1,8 @@
+node_modules
+dist
+*.local
+.env.local
+# Persönliche Health-Exporte niemals committen
+apple_health_export/
+*export*.zip
+*.tsbuildinfo
